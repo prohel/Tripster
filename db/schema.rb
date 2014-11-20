@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20141120213506) do
 
   create_table "locations", force: true do |t|
     t.string   "name"
-    t.string   "type"
+    t.string   "location_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
