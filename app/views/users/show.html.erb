@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<img src="<%= @User.image %>" alt="<%= @User.name %>">
+<p>
+  <strong>Name:</strong>
+  <%= @User.name %>
+</p>
+
+
+
+
+<%= link_to 'Edit', edit_user_path(@User) %> |
+<%= link_to 'Back', users_path %>
+<%= link_to 'Add Friend', add_friend_path(:friend => @User.id) %>
