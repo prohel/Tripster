@@ -1,4 +1,5 @@
-<%= form_for @user, :html => { :class => "form-horizontal user" } do |f| %>
+<div class="container">
+<%= form_for @user, :html => { :class => "form-signin" } do |f| %>
 
     <% if @user.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
@@ -15,18 +16,12 @@
     </div>
   <% end %>
 
-  <div class="control-group">
-    <%= f.label :email, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :email, :class => 'form-control' %>
-    </div>
+  <h2 class="form-signin-heading">Please sign in</h2>
+    <%= f.label :email, :class => 'sr-only' %>
+      <%= f.text_field :email, :class => 'form-control', id: "inputEmail" %>
     <%= error_span(@user[:email]) %>
-  </div>
-  <div class="control-group">
     <%= f.label :encrypted_password, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :encrypted_password, :class => 'form-control' %>
-    </div>
+      <%= f.text_field :encrypted_password, :class => 'form-control', id: "inputPassword" %>
     <%= error_span(@user[:encrypted_password]) %>
   </div>
   <div class="control-group">
@@ -110,6 +105,6 @@
 
   <%= f.submit nil, :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-            users_path, :class => 'btn btn-default' %>
-
+            users_path, :class => 'btn btn-lg btn-primary btn-block' %>
+</div>
 <% end %>

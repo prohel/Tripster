@@ -13,7 +13,15 @@ class UsersController < ApplicationController
   end
 
   def addFriend
-  	
+  	@Friendship = Friendships.new({user1_id: current_user.id, user2_id: @User.id})
+    if @Friendship.save
+        render 'users/show', notice: 'Friendship request has been sent'
+        #format.json { render :show, status: :created, location: @User }
+    else
+        render 'users/show', notice: 'There has been an error.' 
+        #format.json { render json: @User.errors, status: :unprocessable_entity }
+    end
+
   end
 
   # GET /Users/new
@@ -68,7 +76,7 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_User
       @User = User.find(params[:id]) if params[:id]
-      @User = current_user
+      @User = current_user if !@User
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

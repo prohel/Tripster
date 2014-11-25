@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141120213506) do
+ActiveRecord::Schema.define(version: 20141125214908) do
+
+  create_table "friendships", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user1_id"
+    t.integer  "user2_id"
+  end
+
+  add_index "friendships", ["user1_id"], name: "index_friendships_on_user1_id"
+  add_index "friendships", ["user2_id"], name: "index_friendships_on_user2_id"
 
   create_table "locations", force: true do |t|
     t.string   "name"

@@ -10,7 +10,9 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'trips#index'
-  get 'addFriend/:id' => 'user#addFriend'
+  get 'friend/:id', to: 'users#addFriend', as: 'friend'
+
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

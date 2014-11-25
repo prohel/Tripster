@@ -23,4 +23,8 @@ class User < ActiveRecord::Base
     end
   end
 
+  def hasFriendshipBeenRequested(target)
+    return !Friendships.find_by_user1_id_and_user2_id(self.id, target.id).blank?
+  end
+
 end
