@@ -25,14 +25,14 @@
   <div class="control-group">
     <%= f.label :start_date, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :start_date, :class => 'form-control' %>
+      <%= f.text_field :start_date, :class => 'form-control', :placeholder => 'YYYY-MM-DD' %>
     </div>
     <%= error_span(@trip[:start_date]) %>
   </div>
   <div class="control-group">
     <%= f.label :end_date, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :end_date, :class => 'form-control' %>
+      <%= f.text_field :end_date, :class => 'form-control', :placeholder => 'YYYY-MM-DD' %>
     </div>
     <%= error_span(@trip[:end_date]) %>
   </div>

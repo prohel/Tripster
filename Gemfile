@@ -42,3 +42,5 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+
+gem 'validates_timeliness', '~> 3.0', :git => 'git://github.com/adzap/validates_timeliness.git'
