@@ -2,13 +2,25 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   resources :locations
 
-  resources :trips
-  resources :users
+  resources :trips do
+    collection do
+      get 'search'
+    end
+  end
+
+  resources :users do
+    collection do
+      get 'search'
+      get 'recommend'
+    end
+  end
+
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
+  #root 'trips#index'
   root 'trips#index'
   get 'friend/:id', to: 'users#addFriend', as: 'friend'
 

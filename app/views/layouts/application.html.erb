@@ -5,25 +5,47 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  
 </head>
 <body>
-<% if notice %>
-  <p class="alert alert-success"><%= notice %></p>
-<% end %>
-<% if alert %>
-  <p class="alert alert-danger"><%= alert %></p>
-<% end %>
-<p class="navbar-text pull-right">
-<% if user_signed_in? %>
-  Logged in as <strong><%= current_user.email %></strong>.
-  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-<% else %>
-  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-  <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
-<% end %>
-<%= yield %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
+      <% if notice %>
+        <p class="alert alert-success"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="alert alert-danger"><%= alert %></p>
+      <% end %>
+      <p class="navbar-text pull-right">
+      <% if user_signed_in? %>
+        Logged in as <strong><%= current_user.email %></strong>.
 
+        <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+        <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+        <%= form_tag("/users/search", :method => "get", id: "search-form") do %>
+        <%= text_field_tag :search, params[:search], placeholder: "Search Users/Trips" %>
+        <%= submit_tag "Search", :name => nil %>
+        <% end %> 
+    </div>  
+       
+    <div class="col-md-2">
+      <%= link_to 'Recommendations', "/users/recommend", :class => 'navbar-link' %>
+    </div>
+
+  </div>
+
+       
+        
+      <% else %>
+      <div class="container">
+        <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+        <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+        <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
+      <% end %>
+      <%= yield %>
+      
+      </div>
+</div>
 </body>
 </html>

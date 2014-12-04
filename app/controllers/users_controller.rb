@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 	 before_action :set_User, only: [:addFriend, :show, :edit, :update, :destroy]
-
+   helper_method :recommend
   # GET /Users
   # GET /Users.json
   def index
@@ -70,6 +70,25 @@ class UsersController < ApplicationController
       format.html { redirect_to Users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def search
+    @userSearches = User.where("email like ?", "%#{params[:search]}%").order("created_at DESC")
+    @tripSearches = Trip.where("name like ?", "%#{params[:search]}%").order("created_at DESC")
+  end
+
+  def recommend
+     @recommendList ||= []   
+     @userFriends = ActiveRecord::Base.connection.execute("SELECT user2_id 
+      from friendships where user1_id IN (SELECT user2_id from friendships
+        where user1_id = #{current_user.id}) EXCEPT 
+      SELECT user2_id from friendships where user1_id = #{current_user.id}")
+     @userFriends.each {|x| x.each do |key, value|
+                                      if key == "user2_id"
+                                        @recommendList << User.find(value)
+                                      end
+                                   end 
+                        }   
   end
 
   private
