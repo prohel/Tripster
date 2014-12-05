@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :trips do
     collection do
       get 'search'
+      get 'invite'
     end
   end
 

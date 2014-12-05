@@ -1,10 +1,30 @@
 class TripsController < ApplicationController
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
-
+  #before_action :set_created_by, only: [:create, :edit, :update]
   # GET /trips
   # GET /trips.json
   def index
-    @trips = Trip.all
+    #@trips = Trip.all
+    @userTrips = Trip.where("created_by = ?", current_user.email)
+    @friendsList ||= []   
+     @userFriends = ActiveRecord::Base.connection.execute("SELECT user2_id from friendships
+        where user1_id = #{current_user.id}")
+     @userFriends.each {|x| x.each do |key, value|
+                                      if key == "user2_id"
+                                        @friendsList << User.find(value)
+                                      end
+                                   end 
+                        } 
+    @friendsTripsList ||= []
+    @friendsList.each do |friend|
+        @friendsTripsList << Trip.where("created_by = ?", friend.email).to_a
+                        
+                      end                         
+    # @friendsList.each do |friend|
+    #                       @friendsTripsList = ActiveRecord::Base.connection.execute("SELECT * from trips
+    #     where created_by = #{friend.email}")
+                        
+    #                   end                         
   end
 
   # GET /trips/1
@@ -21,10 +41,33 @@ class TripsController < ApplicationController
   def edit
   end
 
+  # GET /trips/1/invite
+  def invite
+    #respond to do |format|
+    tripId = params[:type]
+    @invitedTrip = Trip.find(tripId)
+    @inviteFriendsList ||= []   
+     @friends = ActiveRecord::Base.connection.execute("SELECT user2_id from friendships
+        where user1_id = #{current_user.id}")
+     @friends.each {|x| x.each do |key, value|
+                                      if key == "user2_id"
+                                        @inviteFriendsList << User.find(value)
+                                      end
+                                   end 
+                        }
+      #format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
+      #end                
+  end
+
+  def requestTrips
+  end
+
+
   # POST /trips
   # POST /trips.json
   def create
     @trip = Trip.new(trip_params)
+    @trip.created_by = current_user.email
     respond_to do |format|
       if @trip.save
         format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
@@ -71,4 +114,10 @@ class TripsController < ApplicationController
     def trip_params
       params.require(:trip).permit(:name, :id, :start_date, :end_date)
     end
+
+    # Set created_by
+   # def set_created_by
+    #  @trip = Trip.find(params[:id])
+     # @trip[:created_by] = "sandesh"
+    #end
 end
