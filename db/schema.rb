@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141204223713) do
+ActiveRecord::Schema.define(version: 20141206033016) do
 
   create_table "friendships", force: true do |t|
     t.datetime "created_at"
@@ -29,6 +29,17 @@ ActiveRecord::Schema.define(version: 20141204223713) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "trip_invites", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "sender_email"
+    t.string   "receiver_email"
+    t.integer  "accepted"
+    t.integer  "trip_id"
+  end
+
+  add_index "trip_invites", ["trip_id"], name: "index_trip_invites_on_trip_id"
 
   create_table "trips", force: true do |t|
     t.string   "name"
