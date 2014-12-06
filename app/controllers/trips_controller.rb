@@ -8,7 +8,7 @@ class TripsController < ApplicationController
     @userTrips = Trip.where("created_by = ?", current_user.email)
     @friendsList ||= []   
      @userFriends = ActiveRecord::Base.connection.execute("SELECT user2_id from friendships
-        where user1_id = #{current_user.id}")
+        where user1_id = #{current_user.id} ")
      @userFriends.each {|x| x.each do |key, value|
                                       if key == "user2_id"
                                         @friendsList << User.find(value)
@@ -44,11 +44,15 @@ class TripsController < ApplicationController
   # GET /trips/1/invite
   def invite
     #respond to do |format|
-    tripId = params[:type]
-    @invitedTrip = Trip.find(tripId)
+    @tripId = params[:type]
+    @invitedTrip = Trip.find(@tripId)
+    @invitedUserEmail = User.where(:id => current_user.id).select(:email)
     @inviteFriendsList ||= []   
      @friends = ActiveRecord::Base.connection.execute("SELECT user2_id from friendships
-        where user1_id = #{current_user.id}")
+        where user1_id = #{current_user.id} EXCEPT
+        SELECT U1.id from users U1, users U2, trip_invites TI, trips T where U1.email = TI.receiver_email
+        and TI.sender_email = T.created_by and  T.id = TI.trip_id and U2.email = T.created_by and
+        U2.id = #{current_user.id}")
      @friends.each {|x| x.each do |key, value|
                                       if key == "user2_id"
                                         @inviteFriendsList << User.find(value)
@@ -59,8 +63,8 @@ class TripsController < ApplicationController
       #end                
   end
 
-  def requestTrips
-  end
+  # def requestTrips
+  # end
 
 
   # POST /trips

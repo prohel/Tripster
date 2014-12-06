@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   resources :locations
+  resources :trips_invites #do
+  #   collection do
+  #     post 'requestTrip'
+  #   end
+  # end
 
   resources :trips do
     collection do
