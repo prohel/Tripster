@@ -1,0 +1,19 @@
+<h1>Listing news</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Created at</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @friendships.each do |f| %>
+      <tr>
+        <td><%= f.created_at %></td>
+        <td><%= "#{f.user1.name} became friend with #{f.user2.name}" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

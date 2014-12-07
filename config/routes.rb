@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   #For likes
   match 'like' => 'users#like', :via => [:post]
   match 'unlike' => 'users#unlike', :via => [:post]
-
+  get 'newsfeed' => 'newsfeed#index'
   resources :locations
   resources :trips_invites do
     collection do
@@ -38,7 +38,7 @@ Rails.application.routes.draw do
     end
   end
 
-  
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.
