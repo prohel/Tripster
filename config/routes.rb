@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   resources :trips_invites do
     collection do
       post 'requestTrip'
-      post 'acceptRequest'
-      post 'declineRequest'
+      # post 'acceptRequest'
+      # post 'declineRequest'
       # get 'hasJoiningTripBeenRequested'
     end
   end
