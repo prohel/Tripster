@@ -1,3 +1,23 @@
 // Place all the styles related to the Trips controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.like{
+    color: #990033;
+    font-weight: bold;
+    padding: 5px;
+}
+.unlike{
+    color: #393f4c;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.likes{
+    padding: 5px;
+}
+.like_trip{
+    padding-left: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+}

@@ -27,4 +27,6 @@ class User < ActiveRecord::Base
     return !Friendships.find_by_user1_id_and_user2_id(self.id, target.id).blank?
   end
 
+ acts_as_liker
+
 end
