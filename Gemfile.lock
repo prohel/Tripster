@@ -5,6 +5,13 @@ GIT
     validates_timeliness (3.0.14)
       timeliness (~> 0.3.7)
 
+GIT
+  remote: git://github.com/rsim/oracle-enhanced.git
+  revision: f15de843c572f1d73a52907cb47f8a4b884c5ec5
+  branch: rails4
+  specs:
+    activerecord-oracle_enhanced-adapter (1.4.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -119,6 +126,7 @@ GEM
     rdoc (4.1.2)
       json (~> 1.4)
     ref (1.0.5)
+    ruby-oci8 (2.1.7)
     sass (3.2.19)
     sass-rails (4.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -167,6 +175,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-oracle_enhanced-adapter!
   coffee-rails (~> 4.0.0)
   devise
   jbuilder (~> 2.0)
@@ -175,6 +184,7 @@ DEPENDENCIES
   omniauth
   omniauth-facebook
   rails (= 4.1.6)
+  ruby-oci8
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
   socialization

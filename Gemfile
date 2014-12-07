@@ -9,6 +9,10 @@ gem 'rails', '4.1.6'
 gem 'sqlite3'
 #Use for likes
 gem 'socialization'
+
+gem 'ruby-oci8'
+gem 'activerecord-oracle_enhanced-adapter', github: 'rsim/oracle-enhanced', branch: 'rails4'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
