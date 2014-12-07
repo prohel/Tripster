@@ -1,16 +1,5 @@
 Rails.application.routes.draw do
-  resources :album_ratings
-
-  resources :attachment_ratings
-
-  resources :attachment_comments
-
-  resources :album_comments
-
-  resources :attachments
-
-  resources :albums
-
+  
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   #For likes
   match 'like' => 'users#like', :via => [:post]
@@ -27,6 +16,14 @@ Rails.application.routes.draw do
   end
 
   resources :trips do
+    resources :albums do
+      resources :albums_comments
+      resources :albums_ratings
+    end
+    resources :attachments do
+      resources :attachment_comments
+      resources :attachment_ratings
+    end
     collection do
       get 'search'
       get 'invite'
