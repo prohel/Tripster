@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @attachment_comment.user %>
+</p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @attachment_comment.text %>
+</p>
+
+<p>
+  <strong>Attachment:</strong>
+  <%= @attachment_comment.attachment %>
+</p>
+
+<%= link_to 'Edit', edit_attachment_comment_path(@attachment_comment) %> |
+<%= link_to 'Back', attachment_comments_path %>

@@ -1,0 +1,29 @@
+<h1>Listing album_ratings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Score</th>
+      <th>Album</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @album_ratings.each do |album_rating| %>
+      <tr>
+        <td><%= album_rating.user %></td>
+        <td><%= album_rating.score %></td>
+        <td><%= album_rating.album %></td>
+        <td><%= link_to 'Show', album_rating %></td>
+        <td><%= link_to 'Edit', edit_album_rating_path(album_rating) %></td>
+        <td><%= link_to 'Destroy', album_rating, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Album rating', new_album_rating_path %>
