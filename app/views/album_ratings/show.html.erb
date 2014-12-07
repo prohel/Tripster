@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @album_rating.user %>
+</p>
+
+<p>
+  <strong>Score:</strong>
+  <%= @album_rating.score %>
+</p>
+
+<p>
+  <strong>Album:</strong>
+  <%= @album_rating.album %>
+</p>
+
+<%= link_to 'Edit', edit_album_rating_path(@album_rating) %> |
+<%= link_to 'Back', album_ratings_path %>

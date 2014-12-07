@@ -1,0 +1,29 @@
+<h1>Listing attachment_comments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Text</th>
+      <th>Attachment</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @attachment_comments.each do |attachment_comment| %>
+      <tr>
+        <td><%= attachment_comment.user %></td>
+        <td><%= attachment_comment.text %></td>
+        <td><%= attachment_comment.attachment %></td>
+        <td><%= link_to 'Show', attachment_comment %></td>
+        <td><%= link_to 'Edit', edit_attachment_comment_path(attachment_comment) %></td>
+        <td><%= link_to 'Destroy', attachment_comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Attachment comment', new_attachment_comment_path %>

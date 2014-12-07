@@ -1,0 +1,29 @@
+<h1>Listing attachment_ratings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Score</th>
+      <th>Attachment</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @attachment_ratings.each do |attachment_rating| %>
+      <tr>
+        <td><%= attachment_rating.user %></td>
+        <td><%= attachment_rating.score %></td>
+        <td><%= attachment_rating.attachment %></td>
+        <td><%= link_to 'Show', attachment_rating %></td>
+        <td><%= link_to 'Edit', edit_attachment_rating_path(attachment_rating) %></td>
+        <td><%= link_to 'Destroy', attachment_rating, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Attachment rating', new_attachment_rating_path %>

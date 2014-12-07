@@ -11,7 +11,78 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141207055910) do
+ActiveRecord::Schema.define(version: 20141207203855) do
+
+  create_table "album_comments", force: true do |t|
+    t.integer  "user_id"
+    t.string   "text"
+    t.integer  "album_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "album_comments", ["album_id"], name: "index_album_comments_on_album_id"
+  add_index "album_comments", ["user_id"], name: "index_album_comments_on_user_id"
+
+  create_table "album_ratings", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "score"
+    t.integer  "album_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "album_ratings", ["album_id"], name: "index_album_ratings_on_album_id"
+  add_index "album_ratings", ["user_id"], name: "index_album_ratings_on_user_id"
+
+  create_table "albums", force: true do |t|
+    t.integer  "trip_id"
+    t.string   "name"
+    t.integer  "created_by_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "albums", ["created_by_id"], name: "index_albums_on_created_by_id"
+  add_index "albums", ["trip_id"], name: "index_albums_on_trip_id"
+
+  create_table "attachment_comments", force: true do |t|
+    t.integer  "user_id"
+    t.string   "text"
+    t.integer  "attachment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "attachment_comments", ["attachment_id"], name: "index_attachment_comments_on_attachment_id"
+  add_index "attachment_comments", ["user_id"], name: "index_attachment_comments_on_user_id"
+
+  create_table "attachment_ratings", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "score"
+    t.integer  "attachment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "attachment_ratings", ["attachment_id"], name: "index_attachment_ratings_on_attachment_id"
+  add_index "attachment_ratings", ["user_id"], name: "index_attachment_ratings_on_user_id"
+
+  create_table "attachments", force: true do |t|
+    t.string   "names"
+    t.string   "type"
+    t.integer  "trip_id"
+    t.integer  "album_id"
+    t.integer  "created_by_id"
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "message"
+  end
+
+  add_index "attachments", ["album_id"], name: "index_attachments_on_album_id"
+  add_index "attachments", ["created_by_id"], name: "index_attachments_on_created_by_id"
+  add_index "attachments", ["trip_id"], name: "index_attachments_on_trip_id"
 
   create_table "follows", force: true do |t|
     t.string   "follower_type"

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  names: MyString
+  type: 
+  trip_id: 
+  album_id: 
+  created_by_id: 
+  url: MyString
+
+two:
+  names: MyString
+  type: 
+  trip_id: 
+  album_id: 
+  created_by_id: 
+  url: MyString

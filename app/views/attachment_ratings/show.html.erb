@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @attachment_rating.user %>
+</p>
+
+<p>
+  <strong>Score:</strong>
+  <%= @attachment_rating.score %>
+</p>
+
+<p>
+  <strong>Attachment:</strong>
+  <%= @attachment_rating.attachment %>
+</p>
+
+<%= link_to 'Edit', edit_attachment_rating_path(@attachment_rating) %> |
+<%= link_to 'Back', attachment_ratings_path %>
