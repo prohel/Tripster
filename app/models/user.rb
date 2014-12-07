@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
+  validates_presence_of :name
 
   def self.from_omniauth(auth)
 	  where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -25,6 +26,23 @@ class User < ActiveRecord::Base
 
   def hasFriendshipBeenRequested(target)
     return !Friendships.find_by_user1_id_and_user2_id(self.id, target.id).blank?
+  end
+
+  def friends
+    result = []
+    friendships_request = Friendship.find_by_user1_id(self.id)
+    friendships_request.each do |fr|
+      result << user2_id if fd.isReciprocate
+    end
+    friendships_invites = Friendship.find_by_user2_id(self.id)
+    friendships_invites.each do |fi|
+      result << user1_id if fi.isReciprocate && !result.contains(user1_id)
+    end
+  end
+
+  def friendships
+    result = []
+    
   end
 
  acts_as_liker

@@ -60,7 +60,9 @@
         <td><%= trip.start_date %></td>
         <td><%= trip.end_date %></td>
         <td><%= trip.created_by %></td>
-        <td> <%= link_to t('.requestTrips', :default => t("helpers.links.request")), requestTrip_trips_invites_path(:trip_id => trip.id, :accepted => 2), :method => :post,  :class => 'btn btn-default btn-xs san' %> </td>
+        <%if !trip.isMember(current_user)%>
+        <td> <%= link_to t('.requestTrips', :default => t("helpers.links.request")), requestTrip_trips_invites_path(:trip_id => trip.id, :accepted => 2), :method => :post,  :class => 'btn btn-default btn-xs' %> </td>
+        <%end%>
       </tr>
       <% end %>
     <% end %>
