@@ -6,7 +6,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <!--<th><%= model_class.human_attribute_name(:id) %></th>-->
+      <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:start_date) %></th>
       <th><%= model_class.human_attribute_name(:end_date) %></th>
@@ -17,7 +17,7 @@
   <tbody>
     <% @userTrips.each do |trip| %>
       <tr>
-        <!--<td><%= link_to trip.id, trip_path(trip) %></td>-->
+        <td><%= link_to trip.id, trip_path(trip) %></td>
         <td><%= link_to trip.name, trip_path(trip) %></td>
         <td><%= trip.start_date %></td>
         <td><%= trip.end_date %></td>
@@ -42,7 +42,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <!-- <th><%= model_class.human_attribute_name(:id) %></th> -->
+      <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:start_date) %></th>
       <th><%= model_class.human_attribute_name(:end_date) %></th>
@@ -54,12 +54,12 @@
     <% @friendsTripsList.each do |trips| %>
     <% trips.each do |trip| %>
       <tr>
-        <!-- <td><%= trip.id %></td> -->
+        <td><%= trip.id %></td>
         <td><%= trip.name %></td>
         <td><%= trip.start_date %></td>
         <td><%= trip.end_date %></td>
         <td><%= trip.created_by %></td>
-        <td> <%= link_to t('.requestTrips', :default => t("helpers.links.request")), requestTrip_trips_invites_path(:trip_id => trip.id, :accepted => 2), :method => :post,  :class => 'btn btn-default btn-xs' %> </td>
+        <td> <%= link_to t('.requestTrips', :default => t("helpers.links.request")), requestTrip_trips_invites_path(:trip_id => trip.id, :accepted => 2), :method => :post,  :class => 'btn btn-default btn-xs san' %> </td>
       </tr>
       <% end %>
     <% end %>
@@ -69,3 +69,4 @@
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_trip_path,
             :class => 'btn btn-primary' %>
+<!--disabled: hasJoiningTripBeenRequested_trips_invites_path(trip.created_by, trip.id-->

@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   resources :trips_invites do
     collection do
       post 'requestTrip'
+      post 'acceptRequest'
+      post 'declineRequest'
+      # get 'hasJoiningTripBeenRequested'
     end
   end
 
@@ -11,6 +14,7 @@ Rails.application.routes.draw do
     collection do
       get 'search'
       get 'invite'
+      get 'showTripNotifications'
     end
   end
 

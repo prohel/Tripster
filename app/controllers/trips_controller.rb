@@ -107,6 +107,43 @@ class TripsController < ApplicationController
     end
   end
 
+  def showTripNotifications
+    # @userTrips = Trip.where("created_by = ?", current_user.email)
+    # @friendsList ||= []   
+    #  @userFriends = ActiveRecord::Base.connection.execute("SELECT user2_id from friendships
+    #     where user1_id = #{current_user.id} ")
+    #  @userFriends.each {|x| x.each do |key, value|
+    #                                   if key == "user2_id"
+    #                                     @friendsList << User.find(value)
+    #                                   end
+    #                                end 
+    #                     } 
+    # @friendsTripsList ||= []
+    # @friendsList.each do |friend|
+    #     @friendsTripsList << Trip.where("created_by = ?", friend.email).to_a
+                        
+    #                   end 
+    @myRequestsToJoinTrip = TripInvite.find_by_sql("SELECT * FROM trip_invites TI, trips T, users U
+      WHERE TI.trip_id = T.id and U.id = #{current_user.id} and T.created_by != U.email
+      and T.created_by = TI.receiver_email")
+
+    @friendsInvitedToTrip = TripInvite.find_by_sql("SELECT * FROM trip_invites TI, trips T, users U
+      WHERE TI.trip_id = T.id and U.id = #{current_user.id} and T.created_by = U.email
+      and T.created_by = TI.sender_email")           
+
+    @requestsToJoinMyTrip = TripInvite.find_by_sql("SELECT * FROM trip_invites TI, trips T, users U 
+      WHERE TI.trip_id = T.id and U.id = #{current_user.id} and T.created_by = TI.receiver_email and 
+      TI.receiver_email = U.email")
+
+    @requestsToJoinFriendsTrip = TripInvite.find_by_sql("SELECT * FROM trip_invites TI, trips T, users U 
+      WHERE TI.trip_id = T.id and U.id = #{current_user.id} and T.created_by = TI.sender_email and 
+      TI.receiver_email = U.email")
+  end
+
+  # def hasJoiningTripBeenRequested(receiverEmail, tripId)
+  #   return !TripInvite.find_by_sender_email_and_receiver_email_and_trip_id(self.email, receiverEmail, tripId).blank?
+  # end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
