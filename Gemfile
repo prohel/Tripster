@@ -10,7 +10,9 @@ gem 'sqlite3'
 #Use for likes
 gem 'socialization'
 
+#OCI-8 gem not for development mode
 gem 'ruby-oci8'
+#ACTIVE RECORD ADAPTER for development mode
 gem 'activerecord-oracle_enhanced-adapter', github: 'rsim/oracle-enhanced', branch: 'rails4'
 
 # Use SCSS for stylesheets
