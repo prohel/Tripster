@@ -10,8 +10,8 @@ gem 'sqlite3'
 #Use for likes
 gem 'socialization'
 
-#'ruby-oci8'
-#'activerecord-oracle_enhanced-adapter', github: 'rsim/oracle-enhanced', branch: 'rails4'
+gem 'ruby-oci8'
+gem 'activerecord-oracle_enhanced-adapter', github: 'rsim/oracle-enhanced', branch: 'rails4'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
