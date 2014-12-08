@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 20141207203855) do
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "message"
+    t.string   "message"
   end
 
   add_index "attachments", ["album_id"], name: "index_attachments_on_album_id"
