@@ -84,7 +84,6 @@ ActiveRecord::Schema.define(version: 20141207203855) do
   add_index "attachments", ["created_by_id"], name: "index_attachments_on_created_by_id"
   add_index "attachments", ["trip_id"], name: "index_attachments_on_trip_id"
 
-
   create_table "follows", force: true do |t|
     t.string   "follower_type"
     t.integer  "follower_id"
