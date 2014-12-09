@@ -2,4 +2,8 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Back', trip_attachments_path %>
+<% if @attachment.album.blank? %>
+	<%= link_to 'Back', trip_path(@attachment.trip_id) %>
+<% else %>
+	<%= link_to 'Back', trip_album_path(@attachment.trip_id, @attachment.album) %>
+<% end %>

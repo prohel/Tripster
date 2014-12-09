@@ -19,3 +19,28 @@
 <%= link_to 'Back', trip_path(@album.trip_id) %>
 <%= link_to t('.add', :default => t("helpers.links.add_attachment")),
               new_trip_attachment_path(:trip_id => @album.trip_id, :album_id => @album.id), :class => 'btn btn-default' %>
+<br><br>
+
+<% @attachments.each do |attachment| %>
+	<tr>
+        <td><%= attachment.names %></td>
+        <td><%= attachment.category %></td>
+        <td>
+          <% unless attachment.album.blank? then %>
+            <%= Album.find(attachment.album).name %>
+          <% end %>
+        </td>
+        <td><%= attachment.created_by.name %></td>
+        <td>
+          <% if attachment.category == "Image" %>
+            <a href="<%= attachment.url %>"><img src="<%= attachment.url %>" alt="<%= attachment.names %>" class="thumbnail"></a>
+          <% elsif attachment.category == "Link" %>
+            <a href="<%= attachment.url %>">Follow Link</a>
+          <% end %>
+        </td>
+        <td><%= link_to 'Show', trip_attachment_path(attachment.trip_id, attachment) %></td>
+        <td><%= link_to 'Edit', edit_trip_attachment_path(attachment.trip_id, attachment) %></td>
+        <td><%= link_to 'Destroy', trip_attachment_path(attachment.trip_id, attachment), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <br><br>
+    </tr>
+<% end %>

@@ -26,9 +26,11 @@
   <div class="field">
     <%= f.label :trip_id %><br>
     <%= Trip.find(@attachment.trip).name %>
+    <%= f.hidden_field :trip_id %>
   </div>
   <div class="field">
     <%= f.label :album_id %><br>
+    <%= f.hidden_field :album_id %>
     <% unless @attachment.album.blank? then %>
       <%= Album.find(@attachment.album).name %>
     <% else %>None
@@ -36,6 +38,7 @@
   </div>
   <div class="field">
     <%= f.label :created_by_id %><br>
+    <%= f.hidden_field :created_by_id %>
     <%= User.find(@attachment.created_by_id).name %><br>
   </div>
   <div class="actions">

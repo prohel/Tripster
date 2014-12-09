@@ -42,7 +42,11 @@ class AttachmentsController < ApplicationController
 
     respond_to do |format|
       if @attachment.save
-        format.html { redirect_to trip_path(@trip.id), notice: 'Attachment was successfully created.' }
+        if @attachment.album.blank?
+          format.html { redirect_to trip_path(@trip.id), notice: 'Attachment was successfully created.' }
+        else
+          format.html { redirect_to trip_album_path(@trip.id, @attachment.album_id), notice: 'Attachment was successfully created.' } 
+        end
         format.json { render :show, status: :created, location: @attachment }
       else
         format.html { render :new }
@@ -57,7 +61,11 @@ class AttachmentsController < ApplicationController
     @trip = Trip.find(params[:trip_id])
     respond_to do |format|
       if @attachment.update(attachment_params)
-        format.html { redirect_to trip_path(@trip.id), notice: 'Attachment was successfully updated.' }
+        if @attachment.album.blank?
+          format.html { redirect_to trip_path(@trip.id), notice: 'Attachment was successfully updated.' }
+        else
+          format.html { redirect_to trip_album_path(@trip.id, @attachment.album_id), notice: 'Attachment was successfully updated.' } 
+        end
         format.json { render :show, status: :ok, location: @attachment }
       else
         format.html { render :edit }

@@ -11,6 +11,7 @@ class AlbumsController < ApplicationController
   # GET /albums/1
   # GET /albums/1.json
   def show
+    @attachments = Attachment.where("album_id = ?", @album.id)
   end
 
   # GET /albums/new
@@ -49,7 +50,7 @@ class AlbumsController < ApplicationController
     @trip = Trip.find(params[:trip_id])
     respond_to do |format|
       if @album.update(album_params)
-        format.html { redirect_to trip_path(@trip.id), notice: 'Album was successfully updated.' }
+        format.html { redirect_to trip_album_path, notice: 'Album was successfully updated.' }
         format.json { render :show, status: :ok, location: @album }
       else
         format.html { render :edit }
