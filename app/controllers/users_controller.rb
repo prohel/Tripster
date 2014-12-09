@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 	 before_action :set_User, only: [:addFriend, :show, :edit, :update, :destroy]
-   helper_method :recommend, :areFriends
+   helper_method :recommend
   # GET /Users
   # GET /Users.json
   def index
@@ -10,11 +10,6 @@ class UsersController < ApplicationController
   # GET /Users/1
   # GET /Users/1.json
   def show
-  end
-
-  def areFriends(user1, user2)
-    user1.hasFriendshipBeenRequested(user2) &&
-           user2.hasFriendshipBeenRequested(user1)
   end
 
   def addFriend
