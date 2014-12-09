@@ -2,7 +2,7 @@
 
 <p>
   <strong>Trip:</strong>
-  <%= @album.trip %>
+  <%= @album.trip.name %>
 </p>
 
 <p>
@@ -12,8 +12,10 @@
 
 <p>
   <strong>Created by:</strong>
-  <%= @album.created_by %>
+  <%= User.find(@album.created_by_id).name %>
 </p>
 
-<%= link_to 'Edit', edit_album_path(@album) %> |
-<%= link_to 'Back', albums_path %>
+<%= link_to 'Edit', edit_trip_album_path %> |
+<%= link_to 'Back', trip_path(@album.trip_id) %>
+<%= link_to t('.add', :default => t("helpers.links.add_attachment")),
+              new_trip_attachment_path(:trip_id => @album.trip_id, :album_id => @album.id), :class => 'btn btn-default' %>

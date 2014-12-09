@@ -4,6 +4,7 @@ class AlbumsController < ApplicationController
   # GET /albums
   # GET /albums.json
   def index
+    @trip = Trip.find(params[:trip_id])
     @albums = Album.all
   end
 
@@ -14,21 +15,26 @@ class AlbumsController < ApplicationController
 
   # GET /albums/new
   def new
-    @album = Album.new
+    @trip = Trip.find(params[:trip_id])
+    @album = @trip.albums.new
+    @album.created_by_id = current_user.id
   end
 
   # GET /albums/1/edit
   def edit
+    @trip = Trip.find(params[:trip_id])
   end
 
   # POST /albums
   # POST /albums.json
   def create
     @album = Album.new(album_params)
+    @trip = Trip.find(params[:trip_id])
+    @album.created_by_id = current_user.id
 
     respond_to do |format|
       if @album.save
-        format.html { redirect_to @album, notice: 'Album was successfully created.' }
+        format.html { redirect_to trip_album_path(@trip.id, @album), notice: 'Album was successfully created.' }
         format.json { render :show, status: :created, location: @album }
       else
         format.html { render :new }
@@ -40,9 +46,10 @@ class AlbumsController < ApplicationController
   # PATCH/PUT /albums/1
   # PATCH/PUT /albums/1.json
   def update
+    @trip = Trip.find(params[:trip_id])
     respond_to do |format|
       if @album.update(album_params)
-        format.html { redirect_to @album, notice: 'Album was successfully updated.' }
+        format.html { redirect_to trip_path(@trip.id), notice: 'Album was successfully updated.' }
         format.json { render :show, status: :ok, location: @album }
       else
         format.html { render :edit }
@@ -56,7 +63,7 @@ class AlbumsController < ApplicationController
   def destroy
     @album.destroy
     respond_to do |format|
-      format.html { redirect_to albums_url, notice: 'Album was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'Album was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

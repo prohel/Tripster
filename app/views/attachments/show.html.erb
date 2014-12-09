@@ -1,34 +1,47 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Names:</strong>
+  <strong>Name:</strong>
   <%= @attachment.names %>
 </p>
 
 <p>
-  <strong>Type:</strong>
-  <%= @attachment.type %>
-</p>
-
-<p>
-  <strong>Trip:</strong>
-  <%= @attachment.trip %>
-</p>
-
-<p>
-  <strong>Album:</strong>
-  <%= @attachment.album %>
-</p>
-
-<p>
-  <strong>Created by:</strong>
-  <%= @attachment.created_by %>
+  <strong>Category:</strong>
+  <%= @attachment.category %>
 </p>
 
 <p>
   <strong>Url:</strong>
-  <%= @attachment.url %>
+  <a href="<%= @attachment.url %>">
+    <%= @attachment.url %>
+  </a>
 </p>
 
-<%= link_to 'Edit', edit_attachment_path(@attachment) %> |
-<%= link_to 'Back', attachments_path %>
+<p>
+  <strong>Trip:</strong>
+  <%= Trip.find(@attachment.trip).name %>
+</p>
+
+<p>
+  <strong>Album:</strong>
+  <% unless @attachment.album.blank? then %>
+    <%= Album.find(@attachment.album).name %>
+  <% else %>None
+  <% end %><br>
+</p>
+
+<p>
+  <strong>Created by:</strong>
+  <%= User.find(@attachment.created_by).name %>
+</p>
+
+<% if @attachment.category == "Link" %>
+  <a href="<%= @attachment.url %>"><h2>Click here to follow link</h2></a><br>
+<% end %>
+
+<%= link_to 'Edit', edit_trip_attachment_path %> |
+<%= link_to 'Back', trip_attachments_path %>
+
+<% if @attachment.category == "Image" %>
+  <a href="<%= @attachment.url %>"><img src="<%= @attachment.url %>" alt="<%= @attachment.names %>"></a>
+<% end %>

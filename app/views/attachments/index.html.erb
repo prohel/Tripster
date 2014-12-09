@@ -1,14 +1,17 @@
-<h1>Listing attachments</h1>
+<div class="shift_right">
+<div class="page-header">
+  <h1>Attachments</h1>
+  <p><strong>Trip:</strong> <%= @trip.name %></p> 
+</div>
 
 <table>
   <thead>
     <tr>
-      <th>Names</th>
-      <th>Type</th>
-      <th>Trip</th>
+      <th>Name</th>
+      <th>Category</th>
       <th>Album</th>
       <th>Created by</th>
-      <th>Url</th>
+      <th>Preview</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,14 +20,23 @@
     <% @attachments.each do |attachment| %>
       <tr>
         <td><%= attachment.names %></td>
-        <td><%= attachment.type %></td>
-        <td><%= attachment.trip %></td>
-        <td><%= attachment.album %></td>
-        <td><%= attachment.created_by %></td>
-        <td><%= attachment.url %></td>
-        <td><%= link_to 'Show', attachment %></td>
-        <td><%= link_to 'Edit', edit_attachment_path(attachment) %></td>
-        <td><%= link_to 'Destroy', attachment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= attachment.category %></td>
+        <td>
+          <% unless attachment.album.blank? then %>
+            <%= Album.find(attachment.album).name %>
+          <% end %>
+        </td>
+        <td><%= attachment.created_by.name %></td>
+        <td>
+          <% if attachment.category == "Image" %>
+            <a href="<%= attachment.url %>"><img src="<%= attachment.url %>" alt="<%= attachment.names %>" class="thumbnail"></a>
+          <% elsif attachment.category == "Link" %>
+            <a href="<%= attachment.url %>">Follow Link</a>
+          <% end %>
+        </td>
+        <td><%= link_to 'Show', trip_attachment_path(@trip, attachment) %></td>
+        <td><%= link_to 'Edit', edit_trip_attachment_path(@trip, attachment) %></td>
+        <td><%= link_to 'Destroy', trip_attachment_path(@trip, attachment), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -32,4 +44,5 @@
 
 <br>
 
-<%= link_to 'New Attachment', new_attachment_path %>
+<%= link_to 'New Attachment', new_trip_attachment_path(@trip) %>
+</div>

@@ -1,9 +1,13 @@
-<h1>Listing albums</h1>
+<div class="shift_right">
+<div class="page-header">
+  <h1>Albums</h1>
+  <p><strong>Trip:</strong> <%= @trip.name %></p> 
+</div>
+
 
 <table>
   <thead>
     <tr>
-      <th>Trip</th>
       <th>Name</th>
       <th>Created by</th>
       <th colspan="3"></th>
@@ -13,12 +17,11 @@
   <tbody>
     <% @albums.each do |album| %>
       <tr>
-        <td><%= album.trip %></td>
-        <td><%= album.name %></td>
-        <td><%= album.created_by %></td>
-        <td><%= link_to 'Show', album %></td>
-        <td><%= link_to 'Edit', edit_album_path(album) %></td>
-        <td><%= link_to 'Destroy', album, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= album.name %> </td>
+        <td><%= User.find(album.created_by_id).name %> </td>
+        <td><%= link_to 'Show', trip_album_path(@trip, album) %> </td>
+        <td><%= link_to 'Edit', edit_trip_album_path(@trip, album) %> </td>
+        <td><%= link_to 'Destroy', trip_album_path(@trip, album), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +29,5 @@
 
 <br>
 
-<%= link_to 'New Album', new_album_path %>
+<%= link_to 'New Album', new_trip_album_path(@trip) %>
+</div>

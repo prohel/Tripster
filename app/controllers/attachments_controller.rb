@@ -4,6 +4,7 @@ class AttachmentsController < ApplicationController
   # GET /attachments
   # GET /attachments.json
   def index
+    @trip = Trip.find(params[:trip_id])
     @attachments = Attachment.all
   end
 
@@ -14,21 +15,34 @@ class AttachmentsController < ApplicationController
 
   # GET /attachments/new
   def new
-    @attachment = Attachment.new
+    @trip = Trip.find(params[:trip_id])
+    @attachment = @trip.attachments.new
+    @attachment.created_by_id = current_user.id
+    #@attachment = Attachment.new
+    if(params.has_key?(:album_id))
+      @attachment.album_id = params[:album_id]
+    end
   end
 
   # GET /attachments/1/edit
   def edit
+    @trip = Trip.find(params[:trip_id])
   end
 
   # POST /attachments
   # POST /attachments.json
   def create
     @attachment = Attachment.new(attachment_params)
+    @trip = Trip.find(params[:trip_id])
+    @attachment.created_by_id = current_user.id
+
+    if(params.has_key?(:album_id))
+      @attachment.album_id = params[:album_id]
+    end
 
     respond_to do |format|
       if @attachment.save
-        format.html { redirect_to @attachment, notice: 'Attachment was successfully created.' }
+        format.html { redirect_to trip_path(@trip.id), notice: 'Attachment was successfully created.' }
         format.json { render :show, status: :created, location: @attachment }
       else
         format.html { render :new }
@@ -40,9 +54,10 @@ class AttachmentsController < ApplicationController
   # PATCH/PUT /attachments/1
   # PATCH/PUT /attachments/1.json
   def update
+    @trip = Trip.find(params[:trip_id])
     respond_to do |format|
       if @attachment.update(attachment_params)
-        format.html { redirect_to @attachment, notice: 'Attachment was successfully updated.' }
+        format.html { redirect_to trip_path(@trip.id), notice: 'Attachment was successfully updated.' }
         format.json { render :show, status: :ok, location: @attachment }
       else
         format.html { render :edit }
@@ -69,6 +84,6 @@ class AttachmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def attachment_params
-      params.require(:attachment).permit(:names, :type, :trip_id, :album_id, :created_by_id, :url)
+      params.require(:attachment).permit(:names, :category, :trip_id, :album_id, :created_by_id, :url)
     end
 end

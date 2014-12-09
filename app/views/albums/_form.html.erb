@@ -1,4 +1,4 @@
-<%= form_for(@trip, @album) do |f| %>
+<%= form_for [@trip, @album] , :html => { :class => "form-horizontal album"} do |f| %>
   <% if @album.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@album.errors.count, "error") %> prohibited this album from being saved:</h2>
@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :trip_id %><br>
-    <%= f.text_field :trip_id %>
+    <%= f.hidden_field :trip_id %>
   </div>
   <div class="field">
     <%= f.label :name %><br>
@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :created_by_id %><br>
-    <%= f.text_field :created_by_id %>
+    <%= f.hidden_field :created_by_id %>
   </div>
   <div class="actions">
     <%= f.submit %>

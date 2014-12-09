@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141207203855) do
+ActiveRecord::Schema.define(version: 20141208012652) do
 
   create_table "album_comments", force: true do |t|
     t.integer  "user_id"
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20141207203855) do
 
   create_table "attachments", force: true do |t|
     t.string   "names"
-    t.string   "type"
+    t.string   "category"
     t.integer  "trip_id"
     t.integer  "album_id"
     t.integer  "created_by_id"

@@ -30,6 +30,9 @@ class TripsController < ApplicationController
   # GET /trips/1
   # GET /trips/1.json
   def show
+    set_trip
+    @albums = @trip.albums
+    @attachments = @trip.attachments
   end
 
   # GET /trips/new
